@@ -85,7 +85,3 @@ window.addEventListener('load', function () {
         }
     })
 });
-
-function draw(img) {
-
-}
