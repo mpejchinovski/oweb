@@ -171,13 +171,6 @@ h3 {
     overflow: hidden;
 }
 
-#galerija img {
-    width: 250px;
-    margin: 10px;
-    height: 250px;
-    border-radius: 10px;
-}
-
 .post {
     align-self: center;
     width: 300px;
@@ -195,6 +188,9 @@ h3 {
 
 .post img {
     align-self: center;
+    width: 87%;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 .post button {
@@ -217,3 +213,38 @@ h3 {
 #com {
     align-self: center;
 }
+
+#comment-text {
+    color: #0f3057;
+    font-size: 17px;
+    background-color: #0f3057;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+#comment-time, #comment-date {
+    font-size: 15px;
+}
+
+#comment {
+    border: 2px solid #0f3057;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#thumbs {
+    align-self: center;
+    display: flex;
+}
+
+#thumbs img {
+    width: 40px;
+    height: 40px;
+}
+
+#thumbs span {
+    align-self: center;
+}
+
