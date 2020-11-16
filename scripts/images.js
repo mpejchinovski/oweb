@@ -34,19 +34,19 @@ function createThumbs(post) {
 }
 
 function createComment(text, date, time) {
-    let comment = document.createElement('div');
-    comment.id = "comment";
-    comment.insertAdjacentHTML('beforeend', `
-        <div id="comment-text"></div>
-        <span id="comment-date"></span> <br />
-        <span id="comment-time"></span>
-    `);
-
-    comment.children[0].append(text);
-    comment.children[1].append(date);
-    comment.children[3].append(time);
+	let comment = document.createElement('div');
+	comment.id = "comment";
+	comment.insertAdjacentHTML('beforeend', `
+	        <div id="comment-text"></div>
+	        <span id="comment-date"></span> <br />
+	        <span id="comment-time"></span>
+	`);
+	
+	comment.children[0].append(text);
+	comment.children[1].append(date);
+	comment.children[3].append(time);
     
-    return comment;
+	return comment;
 }
 
 function createCommentSection(post) {
@@ -65,16 +65,18 @@ function createCommentSection(post) {
     let [commentInput, commentBtn,,,, comments] = commentSection.children;
 
     commentBtn.onclick = () => {
-        let cmnt = createComment(commentInput.value,
-            (new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString());
-        comments.prepend(cmnt, document.createElement('br'));
-        storageArray[parseInt(post.id.replace("slika", ""))].comments
-            .push({
-                text: cmnt.children[0].textContent,
-                date: cmnt.children[1].textContent,
-                time: cmnt.children[3].textContent
-            });
-        localStorage.setItem('images', JSON.stringify(storageArray));
+        if (commentInput.value.trim() != "") {
+	        let cmnt = createComment(commentInput.value,
+	            (new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString());
+	        comments.prepend(cmnt, document.createElement('br'));
+	        storageArray[parseInt(post.id.replace("slika", ""))].comments
+	            .push({
+	                text: cmnt.children[0].textContent,
+	                date: cmnt.children[1].textContent,
+	                time: cmnt.children[3].textContent
+	            });
+	        localStorage.setItem('images', JSON.stringify(storageArray));
+	    }
     }
 
     for (let comment of imageObjects[parseInt(post.id.replace("slika", ""))].comments)

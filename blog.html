@@ -2,8 +2,9 @@
     <head>
         <title>Blog</title>
         <link rel="stylesheet" href="style.css">      
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <script src="scripts/blog.js"> </script> 
     </head>
-
     <body>
         <header>
             <nav>
@@ -13,5 +14,17 @@
                 <a href="kontakt.html"><li>Kontakt</li></a>
             </nav>
         </header>
+        <main class="main">
+            <div class="main-center">
+                <div style="margin-bottom: 5px;"> Your name: </div>
+                <input type="text" id="post-user-input" 
+                    style="margin-bottom: 5px; padding: 5px; border-radius: 5px;" />
+                <div style="margin-bottom: 5px;"> Your text: </div>
+                <textarea name="text" id="post-text-input"> </textarea>
+                <button type="submit" id="post-submit"> Submit </button>
+                <div id="blog-posts">
+                </div>
+            </div>
+        </main>
     </body>
 </html>
