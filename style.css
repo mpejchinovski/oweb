@@ -31,7 +31,7 @@ a {
 .main {
     display: grid;
     grid-template-areas: 'left center right';
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 25% 50% 25%;
     margin: 10px;
 }
 
@@ -297,4 +297,45 @@ h3 {
     word-wrap: break-word;
     margin-bottom: 5px;
     color: #0f3057;
+}
+
+.main-left {
+    grid-area: left;
+    padding: 8px;
+}
+
+.sidebar {
+    height: 100%;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.sidebar-entry {
+    border: 3px solid #0f3057;
+    height: 60px;
+    padding: 10px;
+    display: grid;
+    grid-template-areas: 'left right';
+    grid-template-columns: 50px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.image-thumbnail-wrapper {
+    grid-area: left;
+    background-color: red;
+    height: 100%;
+    width: 50px;
+}
+
+.image-thumbnail-wrapper img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.image-preview-info {
+    align-self: flex-end;
+    padding: 5px;
+    margin-left: 3px;
 }

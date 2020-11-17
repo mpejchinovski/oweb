@@ -1,7 +1,37 @@
 let storageArray = [], imageObjects = [];
 let img;
 
-function createThumbs(post) {
+function createSidebarEntry(src, id) {
+    let sidebarEntry = document.createElement('div');
+    sidebarEntry.className = "sidebar-entry";
+    sidebarEntry.id = "sidebar-entry-" + id.replace("slika", "");
+
+    sidebarEntry.insertAdjacentHTML('beforeend', `
+        <div class="image-thumbnail-wrapper">
+            <img class="image-thumbnail" src="" /> 
+        </div>
+        <div class="image-preview-info">
+            <br />
+            <span style="font-size: 15px;"> Comments: </span>
+        </div
+    `);
+
+    let numComments = storageArray[parseInt(id.replace("slika", ""))] ?
+        storageArray[parseInt(id.replace("slika", ""))].comments.length : 0;
+
+    sidebarEntry.querySelector('span').textContent = "Comments: " + numComments;
+
+    sidebarEntry.onclick = () => window.location = "#" + id;
+    sidebarEntry.onmouseover = function() {
+        this.style.cursor = "pointer";
+    }
+    sidebarEntry.children[0].children[0].src = src;
+    sidebarEntry.children[1].prepend("Slika " + id.replace("slika", ""));
+
+    return sidebarEntry;
+}
+
+function createThumbs(id) {
     let thumbs = document.createElement('div');
     thumbs.id = "thumbs";
     
@@ -14,18 +44,18 @@ function createThumbs(post) {
     
     const [ like, likeCounter, dislike, dislikeCounter ] = thumbs.children;
 
-    let postObj = storageArray[parseInt(post.id.replace("slika", ""))];
+    let postObj = storageArray[parseInt(id.replace("slika", ""))];
     likeCounter.textContent = postObj ? postObj.likes : 0;
     dislikeCounter.textContent = postObj ? postObj.dislikes : 0;
 
     like.onclick = () => {
-        storageArray[parseInt(post.id.replace("slika", ""))].likes += 1;
+        storageArray[parseInt(id.replace("slika", ""))].likes += 1;
         localStorage.setItem('images', JSON.stringify(storageArray));
         likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
     }
 
     dislike.onclick = () => {
-        storageArray[parseInt(post.id.replace("slika", ""))].dislikes += 1;
+        storageArray[parseInt(id.replace("slika", ""))].dislikes += 1;
         localStorage.setItem('images', JSON.stringify(storageArray));
         dislikeCounter.textContent = parseInt(dislikeCounter.textContent) + 1;
     }
@@ -49,7 +79,7 @@ function createComment(text, date, time) {
 	return comment;
 }
 
-function createCommentSection(post) {
+function createCommentSection(id) {
     let commentSection = document.createElement('div');
     commentSection.id = "comment-section";
 
@@ -69,17 +99,25 @@ function createCommentSection(post) {
 	        let cmnt = createComment(commentInput.value,
 	            (new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString());
 	        comments.prepend(cmnt, document.createElement('br'));
-	        storageArray[parseInt(post.id.replace("slika", ""))].comments
+	        storageArray[parseInt(id.replace("slika", ""))].comments
 	            .push({
 	                text: cmnt.children[0].textContent,
 	                date: cmnt.children[1].textContent,
 	                time: cmnt.children[3].textContent
 	            });
-	        localStorage.setItem('images', JSON.stringify(storageArray));
-	    }
+	        
+            localStorage.setItem('images', JSON.stringify(storageArray));
+            
+            let numComments = document
+                .querySelector(`div[id="sidebar-entry-${id.replace("slika", "")}"]`)
+                .querySelector('span'); 
+        
+            numComments.textContent = "Comments: " +
+                storageArray[id.replace("slika", "")].comments.length;
+        }
     }
 
-    for (let comment of imageObjects[parseInt(post.id.replace("slika", ""))].comments)
+    for (let comment of imageObjects[parseInt(id.replace("slika", ""))].comments)
         comments.prepend(createComment(comment.text, comment.date, comment.time), 
             document.createElement('br'));
 
@@ -94,7 +132,8 @@ function createPost(image) {
 }
 
 window.addEventListener('load', function () {
-    let galerija = document.querySelector('div[id="galerija"]');
+    let galerija = document.querySelector('div[id="galerija"]'),
+        sidebar = document.querySelector('div[class="sidebar"]');
     let storageString = localStorage.getItem('images');
 
     if (storageString) {
@@ -111,9 +150,10 @@ window.addEventListener('load', function () {
             img.src = storageArray[i].dataURL;
             let div = createPost(img);
             div.id = storageArray[i].id;
-            div.append(createThumbs(div));
-            div.append(createCommentSection(div));
+            
+            div.append(createThumbs(div.id), createCommentSection(div.id));
             galerija.prepend(div);
+            sidebar.prepend(createSidebarEntry(storageArray[i].dataURL, storageArray[i].id));
         }
     }
     
@@ -125,14 +165,16 @@ window.addEventListener('load', function () {
         div.id = "slika" + imageObjects.length;
         galerija.prepend(div);
 
+        sidebar.prepend(createSidebarEntry(img.src, div.id));
+
         imageObjects.push({ url: img.src, id: div.id, comments: [] });
     });
 
     document.querySelector('button[id="savebtn"]').addEventListener('click', function () {
         for (let i = storageArray.length; i < imageObjects.length; i++) {
             document.querySelector(`div[id=${imageObjects[i].id}]`)
-                .append(createThumbs(document.querySelector(`div[id=${imageObjects[i].id}]`)),
-                    createCommentSection(document.querySelector(`div[id=${imageObjects[i].id}]`)));
+                .append(createThumbs(imageObjects[i].id),
+                    createCommentSection(imageObjects[i].id));
 
             img = new Image();
             img.src = imageObjects[i].url;
