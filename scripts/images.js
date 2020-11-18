@@ -12,17 +12,27 @@ function createSidebarEntry(src, id) {
         </div>
         <div class="image-preview-info">
             <br />
-            <span style="font-size: 15px;"> Comments: </span>
+            <span id="num-comments" style="font-size: 12px;"> Comments: </span> <br />
+            <span id="num-likes" style="font-size: 12px;"> Likes: </span> <br />
+            <span id="num-dislikes" style="font-size: 12px;"> Dislikes: </span>
         </div
     `);
 
     let numComments = storageArray[parseInt(id.replace("slika", ""))] ?
         storageArray[parseInt(id.replace("slika", ""))].comments.length : 0;
 
-    sidebarEntry.querySelector('span').textContent = "Comments: " + numComments;
+    let numLikes, numDislikes;
+
+    storageArray[parseInt(id.replace("slika", ""))] ?
+        ({ likes: numLikes, dislikes: numDislikes } = storageArray[parseInt(id.replace("slika", ""))])
+        : numLikes = numDislikes = 0;
+
+    sidebarEntry.querySelector('span[id="num-comments"]').textContent = "Comments: " + numComments;
+    sidebarEntry.querySelector('span[id="num-likes"]').textContent = "Likes: " + numLikes;
+    sidebarEntry.querySelector('span[id="num-dislikes"]').textContent = "Dislikes: " + numDislikes;
 
     sidebarEntry.onclick = () => window.location = "#" + id;
-    sidebarEntry.onmouseover = function() {
+    sidebarEntry.onmouseover = function () {
         this.style.cursor = "pointer";
     }
     sidebarEntry.children[0].children[0].src = src;
@@ -34,15 +44,15 @@ function createSidebarEntry(src, id) {
 function createThumbs(id) {
     let thumbs = document.createElement('div');
     thumbs.id = "thumbs";
-    
+
     thumbs.insertAdjacentHTML('beforeend', `
         <img src="images/like.png" />
         <span id="like-counter"> </span>
         <img src="images/dislike.png" />
         <span id="dislike-counter"> </span>
     `);
-    
-    const [ like, likeCounter, dislike, dislikeCounter ] = thumbs.children;
+
+    const [like, likeCounter, dislike, dislikeCounter] = thumbs.children;
 
     let postObj = storageArray[parseInt(id.replace("slika", ""))];
     likeCounter.textContent = postObj ? postObj.likes : 0;
@@ -52,31 +62,41 @@ function createThumbs(id) {
         storageArray[parseInt(id.replace("slika", ""))].likes += 1;
         localStorage.setItem('images', JSON.stringify(storageArray));
         likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+
+        document
+            .querySelector(`div[id="sidebar-entry-${id.replace("slika", "")}"]`)
+            .querySelector('span[id="num-likes"]').textContent = "Likes: " +
+            storageArray[id.replace("slika", "")].likes;
     }
 
     dislike.onclick = () => {
         storageArray[parseInt(id.replace("slika", ""))].dislikes += 1;
         localStorage.setItem('images', JSON.stringify(storageArray));
         dislikeCounter.textContent = parseInt(dislikeCounter.textContent) + 1;
+
+        document
+            .querySelector(`div[id="sidebar-entry-${id.replace("slika", "")}"]`)
+            .querySelector('span[id="num-dislikes"]').textContent = "Dislikes: " +
+            storageArray[id.replace("slika", "")].dislikes;
     }
 
     return thumbs;
 }
 
 function createComment(text, date, time) {
-	let comment = document.createElement('div');
-	comment.id = "comment";
-	comment.insertAdjacentHTML('beforeend', `
+    let comment = document.createElement('div');
+    comment.id = "comment";
+    comment.insertAdjacentHTML('beforeend', `
 	        <div id="comment-text"></div>
 	        <span id="comment-date"></span> <br />
 	        <span id="comment-time"></span>
 	`);
-	
-	comment.children[0].append(text);
-	comment.children[1].append(date);
-	comment.children[3].append(time);
-    
-	return comment;
+
+    comment.children[0].append(text);
+    comment.children[1].append(date);
+    comment.children[3].append(time);
+
+    return comment;
 }
 
 function createCommentSection(id) {
@@ -92,33 +112,33 @@ function createCommentSection(id) {
         <div id="comments"> </div>
     `);
 
-    let [commentInput, commentBtn,,,, comments] = commentSection.children;
+    let [commentInput, commentBtn, , , , comments] = commentSection.children;
 
     commentBtn.onclick = () => {
         if (commentInput.value.trim() != "") {
-	        let cmnt = createComment(commentInput.value,
-	            (new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString());
-	        comments.prepend(cmnt, document.createElement('br'));
-	        storageArray[parseInt(id.replace("slika", ""))].comments
-	            .push({
-	                text: cmnt.children[0].textContent,
-	                date: cmnt.children[1].textContent,
-	                time: cmnt.children[3].textContent
-	            });
-	        
+            let cmnt = createComment(commentInput.value,
+                (new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString());
+            comments.prepend(cmnt, document.createElement('br'));
+            storageArray[parseInt(id.replace("slika", ""))].comments
+                .push({
+                    text: cmnt.children[0].textContent,
+                    date: cmnt.children[1].textContent,
+                    time: cmnt.children[3].textContent
+                });
+
             localStorage.setItem('images', JSON.stringify(storageArray));
-            
+
             let numComments = document
                 .querySelector(`div[id="sidebar-entry-${id.replace("slika", "")}"]`)
-                .querySelector('span'); 
-        
+                .querySelector('span');
+
             numComments.textContent = "Comments: " +
                 storageArray[id.replace("slika", "")].comments.length;
         }
     }
 
     for (let comment of imageObjects[parseInt(id.replace("slika", ""))].comments)
-        comments.prepend(createComment(comment.text, comment.date, comment.time), 
+        comments.prepend(createComment(comment.text, comment.date, comment.time),
             document.createElement('br'));
 
     return commentSection;
@@ -150,13 +170,13 @@ window.addEventListener('load', function () {
             img.src = storageArray[i].dataURL;
             let div = createPost(img);
             div.id = storageArray[i].id;
-            
+
             div.append(createThumbs(div.id), createCommentSection(div.id));
             galerija.prepend(div);
             sidebar.prepend(createSidebarEntry(storageArray[i].dataURL, storageArray[i].id));
         }
     }
-    
+
     document.querySelector('input[type="file"]').addEventListener('change', function () {
         img = new Image();
         img.src = URL.createObjectURL(this.files[0]);
@@ -186,8 +206,10 @@ window.addEventListener('load', function () {
             imgContext.drawImage(img, 0, 0, img.width, img.height);
             let url = imgCanvas.toDataURL("image/jpeg", 0.5);
 
-            storageArray.push({ dataURL: url, id: imageObjects[i].id, comments: [],
-                likes: 0, dislikes: 0 });
+            storageArray.push({
+                dataURL: url, id: imageObjects[i].id, comments: [],
+                likes: 0, dislikes: 0
+            });
             localStorage.setItem('images', JSON.stringify(storageArray));
         }
     })
