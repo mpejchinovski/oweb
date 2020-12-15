@@ -1,5 +1,4 @@
-let storageArray = [], imageObjects = [];
-let img;
+let storageArray = [], imageObjects = [], img;
 
 function createSidebarEntry(src, id) {
     let sidebarEntry = document.createElement('div');
@@ -153,8 +152,8 @@ function createPost(image) {
 
 window.addEventListener('load', function () {
     let galerija = document.querySelector('div[id="galerija"]'),
-        sidebar = document.querySelector('div[class="sidebar"]');
-    let storageString = localStorage.getItem('images');
+        sidebar = document.querySelector('div[class="sidebar"]'),
+        storageString = localStorage.getItem('images');
 
     if (storageString) {
         storageArray = JSON.parse(storageString);

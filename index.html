@@ -3,6 +3,10 @@
 <head>
     <title>Doma</title>
     <link rel="stylesheet" href="style.css">
+    <script src="scripts/films.js">
+    </script>
+    <script src="scripts/config.js">
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 
@@ -52,12 +56,17 @@
                 </div>
             </section>
             <section class="layout" id="omileni">
-                <section id="filmovi">
+                <section id="film-section">
                     <h3>
                         filmovi
                     </h3>
-                    <a class="infoText" href="https://en.wikipedia.org/wiki/Back_to_the_Future">Back to the Future</a>
-                    <span>Drive</span>
+                    <div id="add-film">
+                        <span>Add a film:</span>
+                        <input id="film-input" type="text" />
+                        <button id="film-submit">Add</button>
+                    </div>
+                    <div class="films">
+                    </div>
                 </section>
                 <section id="muzika">
                     <h3>
@@ -71,7 +80,9 @@
                     <h3>
                         Hrana
                     </h3>
-                    <span>Spaghetti</span>
+                    <a class="infoText" href="https://en.wikipedia.org/wiki/Spaghetti">
+                        Spaghetti
+                    </a>
                 </section>
             </section>
         </div>

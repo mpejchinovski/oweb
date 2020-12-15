@@ -9,8 +9,7 @@ function createBlogPost({text, user, time, date}) {
         <span id="post-date"> </span>
     `);
 
-    const [postText, postUsername, postTime, postDate] = blogPost.children;
-
+    let [postText, postUsername, postTime, postDate] = blogPost.children;
     postText.textContent = text;
     postTime.textContent = time;
     postDate.textContent = date;
@@ -23,8 +22,8 @@ function createBlogPost({text, user, time, date}) {
 }
 
 window.addEventListener('load', () => {
-    let postStorage = [];
-    let blogPosts = document.querySelector('div[id="blog-posts"]'),
+    let postStorage = [],
+        blogPosts = document.querySelector('div[id="blog-posts"]'),
         textInput = document.querySelector('textarea[id="post-text-input"]'),
         usernameInput = document.querySelector('input[id="post-user-input"]');
 
@@ -33,7 +32,6 @@ window.addEventListener('load', () => {
     }
 
     let postStorageString = localStorage.getItem('posts');
-
     if (postStorageString) {
         postStorage = JSON.parse(postStorageString);
         for (let post of postStorage) {
@@ -42,20 +40,19 @@ window.addEventListener('load', () => {
     }
 
     document.querySelector('button[id="post-submit"]')
-    .addEventListener('click', () => {
-        if (textInput.value.trim() != "") {
-	        let postObj = { 
-	            text: textInput.value,
-	            user: usernameInput.value,
-	            time: (new Date()).toLocaleTimeString(), 
-	            date: (new Date()).toLocaleDateString()
-	        };
-	        let { blogPost: newPost, user } = createBlogPost(postObj);
-	        blogPosts.prepend(newPost);
-	        postObj.user = user;
-	        postStorage.push(postObj);
-	        localStorage.setItem('posts', JSON.stringify(postStorage));
-        }
-    });
-
+            .addEventListener('click', () => {
+                if (textInput.value.trim() != "") {
+                    let postObj = { 
+                        text: textInput.value,
+                        user: usernameInput.value,
+                        time: (new Date()).toLocaleTimeString(), 
+                        date: (new Date()).toLocaleDateString()
+                    };
+                    let { blogPost: newPost, user } = createBlogPost(postObj);
+                    blogPosts.prepend(newPost);
+                    postObj.user = user;
+                    postStorage.push(postObj);
+                    localStorage.setItem('posts', JSON.stringify(postStorage));
+                }
+            });
 });

@@ -78,22 +78,22 @@ a {
     display: flex;
     text-align: center;
     flex-direction: column;
-    background-color: #0f3057;
     color: #e7e7de;
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
-    width: 50%;
+    width: 40%;
     align-items: center;
+    border: 2px solid #0f3057;;
 }
 
-.layout section span {
+.filmTitle {
     font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
     padding: 5px;
-    margin: 3px;
+    margin: 10px;
     border-radius: 10px;
-    width: 50%;
-    background-color: #00587a;
+    width: 90%;
 }
 
 .layout section a {
@@ -101,8 +101,12 @@ a {
     padding: 5px;
     margin: 3px;
     border-radius: 10px;
-    width: 50%;
-    background-color: #00587a;
+    width: 90%;
+    background-color: #0f3057;;
+}
+
+.layout section span {
+    background-color: #0f3057;
 }
 
 .infoText {
@@ -113,12 +117,12 @@ h3 {
     bottom: 10px;
     position: relative;
     text-transform: uppercase;
-    background-color: #00587a;
     border-radius: 10px;
     padding: 10px;
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
+    color: #0f3057;
 }
 
 #cv img {
@@ -132,13 +136,12 @@ h3 {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    margin: 20px;
-    background-color: #008891;
+    padding: 15px;
+    margin: 10px;
 }
 
 #edukacija span {
-    padding: 10px;
+    padding: 15px;
     font-family: Montserrat;
     font-size: 20px;
     margin: 3px;
@@ -155,7 +158,7 @@ h3 {
 }
 
 #interesenText {
-    background-color: #008891;
+    background-color: #0f3057;
     padding: 15px;
     border-radius: 10px;
     width: 55%;
@@ -348,4 +351,73 @@ h3 {
 
 .image-preview-info span {
     color: #0f3057;
+}
+
+.film {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.film img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.film-overview {
+    width: 90%;
+    font-size: 13px;
+    padding: 15px;
+    color: #0f3057;
+    font-weight: bold;
+}
+
+#add-film {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#add-film input {
+    margin: 5px;
+}
+
+#add-film button {
+    width: 40%;
+    align-self: center;
+    margin: 5px;
+    background-color: #0f3057;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#add-film span {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.films {
+    width: 100%;
+    align-self: center;
+}
+
+.removebtn {
+    background-color: #0f3057;
+    color: white;
+    padding: 6px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+button:hover {
+    cursor: pointer;
 }
