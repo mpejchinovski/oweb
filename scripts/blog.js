@@ -4,7 +4,7 @@ function createBlogPost({text, user, time, date}) {
 
     blogPost.insertAdjacentHTML('beforeend', `
         <span id="post-text"> </span>
-        <span id="post-user"><span style="color: black;">by </span></span>
+        <span id="post-user"><span style="color: orange;">by </span></span>
         <span id="post-time"> </span>
         <span id="post-date"> </span>
     `);

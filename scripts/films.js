@@ -35,6 +35,9 @@ function setFilmInfo(name) {
                     .append(img, overview, remove);
             document.getElementById(name.trim().replaceAll(" ", "").toLowerCase())
                     .querySelector('.filmTitle').textContent = response.results[0].original_title;
+        } else {
+            document.getElementById(name.trim().replaceAll(" ", "").toLowerCase())
+                    .append(remove);
         }
     }
 }

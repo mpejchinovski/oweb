@@ -3,17 +3,19 @@
 }
 
 body {
-    background-color: wheat;
+    background: url("images/background.jpg") no-repeat fixed center;
+    background-size: cover;
 }
 
 nav {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: #0f3057;
+    font-weight: bold;
     padding: 10px;
     margin: 10px;
-    border-radius: 10px;
+    background-color: rgba(15, 48, 87, 0.7);
+    border-radius: 5px;
 }
 
 li {
@@ -37,11 +39,12 @@ a {
 
 .main-center {
     grid-area: center;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    background-color: rgba(15, 48, 87, 0.6);
 }
 
 #cv {
@@ -57,17 +60,17 @@ a {
     font-size: 30px;
     padding: 20px;
     color: e7e7de;
-    background-color: #0f3057;
     margin: 10px;
     margin-top: -5px;
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
-    width: 40%;
+    width: 100%;
+    font-weight: bold;
 }
 
 .layout {
     border-radius: 10px;
-    color: ff9642;
+    color: #ff9642;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -83,8 +86,9 @@ a {
     margin: 10px;
     border-radius: 10px;
     width: 40%;
-    align-items: center;
-    border: 2px solid #0f3057;;
+    border-bottom: 5px solid rgba(1,1,1,0.3);
+    border-right: 5px solid rgba(1,1,1,0.3);
+    border-left: 5px solid rgba(1,1,1,0.3);
 }
 
 .filmTitle {
@@ -94,6 +98,7 @@ a {
     margin: 10px;
     border-radius: 10px;
     width: 90%;
+    border: 1px solid white;
 }
 
 .layout section a {
@@ -102,15 +107,23 @@ a {
     margin: 3px;
     border-radius: 10px;
     width: 90%;
-    background-color: #0f3057;;
+    background-color:rgba(15, 48, 87, 0.5);
+    border: 1px solid white;
 }
 
 .layout section span {
-    background-color: #0f3057;
+    background-color:rgba(15, 48, 87, 0.5);
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+
 }
 
 .infoText {
-    color: #e7e7de;
+    width: 100%;
+    align-self: center;
 }
 
 h3 {
@@ -122,7 +135,8 @@ h3 {
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
-    color: #0f3057;
+    color: white;
+    align-self: center;
 }
 
 #cv img {
@@ -138,6 +152,8 @@ h3 {
     flex-direction: column;
     padding: 15px;
     margin: 10px;
+    align-self: center;
+    font-weight: bold;
 }
 
 #edukacija span {
@@ -145,7 +161,9 @@ h3 {
     font-family: Montserrat;
     font-size: 20px;
     margin: 3px;
-    background-color: #0f3057;
+    color: white;
+    border-bottom: 5px solid rgba(1,1,1,0.3);
+    letter-spacing: 1px;
     border-radius: 10px;
 }
 
@@ -158,10 +176,15 @@ h3 {
 }
 
 #interesenText {
-    background-color: #0f3057;
     padding: 15px;
     border-radius: 10px;
-    width: 55%;
+    width: 50%;
+    color: white;
+    align-self: center;
+    font-weight: bold;
+    border-bottom: 5px solid rgba(1,1,1,0.3);
+    border-right: 5px solid rgba(1,1,1,0.3);
+    border-left: 5px solid rgba(1,1,1,0.3);
 }
 
 #galerija {
@@ -175,13 +198,14 @@ h3 {
 }
 
 .post {
+    background-color:  rgba(15, 48, 87, 0.6);;
     align-self: center;
     width: 300px;
     display: flex;
     flex-direction: column;
-    margin: 3px;
+    margin: 10px;
     border-radius: 10px;
-    border: 3px solid #0f3057;
+    border: 3px solid rgba(255,255,255,1);
 }
 
 .post input {
@@ -226,16 +250,18 @@ h3 {
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 5px;
+    border: 1px solid white;
 }
 
 #comment-time,
 #comment-date {
-    font-size: 15px;
+    font-size: 10px;
+    color: white;
 }
 
 #comment {
-    border: 2px solid #0f3057;
-    padding: 5px;
+    border: 1px solid white;
+    padding: 10px;
     border-radius: 10px;
 }
 
@@ -275,19 +301,21 @@ h3 {
 
 #blog-post {
     border-radius: 10px;
-    border: 3px solid #0f3057;
+    border: 1px solid white;
     width: 90%;
     align-self: center;
     margin: 10px;
     padding: 15px;
     display: flex;
     flex-direction: column;
+    background-color: rgba(15, 48, 87, 0.6);
 }
 
 #post-text {
     background-color: #0f3057;
-    color: beige;
+    color: white;
     padding: 10px;
+    border: 1px solid white;
     border-radius: 5px;
     margin-bottom: 6px;
     word-wrap: break-word;
@@ -296,12 +324,13 @@ h3 {
 #post-date,
 #post-time {
     font-size: 15px;
+    color: white;
 }
 
 #post-user {
     word-wrap: break-word;
     margin-bottom: 5px;
-    color: #0f3057;
+    color: white;
 }
 
 .main-left {
@@ -313,10 +342,10 @@ h3 {
     height: 100%;
     border-radius: 5px;
     padding: 3px;
+    color: white;
 }
 
 .sidebar-entry {
-    border: 3px solid #0f3057;
     height: 60px;
     padding: 10px;
     display: grid;
@@ -325,6 +354,8 @@ h3 {
     grid-template-columns: 60px;
     margin: 5px;
     border-radius: 5px;
+    color: white;
+    background-color: rgba(15, 48, 87, 0.7);
 }
 
 .image-thumbnail-wrapper {
@@ -350,7 +381,7 @@ h3 {
 }
 
 .image-preview-info span {
-    color: #0f3057;
+    color: white;
 }
 
 .film {
@@ -372,7 +403,7 @@ h3 {
     width: 90%;
     font-size: 13px;
     padding: 15px;
-    color: #0f3057;
+    color: white;
     font-weight: bold;
 }
 
@@ -384,6 +415,7 @@ h3 {
 
 #add-film input {
     margin: 5px;
+    border: 1px solid white;
 }
 
 #add-film button {
@@ -391,8 +423,8 @@ h3 {
     align-self: center;
     margin: 5px;
     background-color: #0f3057;
-    color: white;
-    border: none;
+    color: #e7e7de;
+    border: 1px solid #e7e7de;
     border-radius: 10px;
     padding: 5px;
 }
@@ -402,6 +434,8 @@ h3 {
     font-size: 15px;
     border-radius: 10px;
     margin: 10px;
+    color: #e7e7de;
+    border: 1px solid white;
 }
 
 .films {
@@ -416,8 +450,39 @@ h3 {
     padding-bottom: 8px;
     border-radius: 10px;
     font-size: 10px;
+    border: 1px solid white;
 }
 
 button:hover {
     cursor: pointer;
+}
+
+#film-input {
+    background-color: rgba(15, 48, 87, 0.3);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    padding: 5px;
+}
+
+#thumbs {
+    color: white;
+}
+
+#com {
+    color: white;
+}
+
+#input-image {
+    position: relative;
+    top: 20px;
+    color: white;
+}
+
+#gallery-center {
+    background-color: rgba(15, 48, 87, 0);
+}
+
+#blog-center {
+    background-color: rgba(15, 48, 87, 0);
 }
